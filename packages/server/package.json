@@ -1,0 +1,36 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node dist/src/app.js",
+    "dev:watch": "nodemon --watch dist/ --watch ../shared/dist --exec node dist/src/app.js",
+    "build": "npx swc ./src -d dist/src --config-file .swcrc",
+    "build:watch": "npx swc ./src -d dist/src --config-file .swcrc -w",
+    "build-shared": "cd ../shared && yarn build",
+    "build-shared:watch": "cd ../shared && yarn build:watch",
+    "build-shared-and-server:watch": "concurrently \"npm:build-shared:watch\" \"npm:build:watch\"",
+    "dev-and-build:watch": "concurrently \"npm:dev:watch\" \"npm:build:watch\"",
+    "dev-server-shared:watch": "concurrently \"npm:dev:watch\" \"npm:build-shared-and-server:watch\"",
+    "start": "node dist/src/app.js"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.62",
+    "@swc/core": "^1.3.83",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.5.7",
+    "concurrently": "^8.2.1",
+    "nodemon": "^3.0.1",
+    "tsc-alias": "^1.8.7",
+    "typescript": "^5.2.2"
+  }
+}
