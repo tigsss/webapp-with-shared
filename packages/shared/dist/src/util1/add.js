@@ -9,5 +9,5 @@ Object.defineProperty(exports, "add1", {
     }
 });
 function add1(num1, num2) {
-    return num1 + num2 + 5;
+    return num1 + num2;
 }
